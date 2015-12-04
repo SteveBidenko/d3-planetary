@@ -1,7 +1,7 @@
 (function() {
   var globe = planetaryjs.planet();
   // Load our custom `autorotate` plugin; see below.
-  globe.loadPlugin(autorotate(10));
+  // globe.loadPlugin(autorotate(5));
   // The `earth` plugin draws the oceans and the land; it's actually
   // a combination of several separate built-in plugins.
   //
@@ -28,10 +28,10 @@
     // Dragging the globe should pause the
     // automatic rotation until we release the mouse.
     onDragStart: function() {
-      this.plugins.autorotate.pause();
+      // this.plugins.autorotate.pause();
     },
     onDragEnd: function() {
-      this.plugins.autorotate.resume();
+      // this.plugins.autorotate.resume();
     }
   }));
   // Set up the globe's initial scale, offset, and rotation.
