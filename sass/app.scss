@@ -1,0 +1,9 @@
+$containerWidth: 1280px;
+
+body {
+  div.container {
+    max-width: $containerWidth;
+    margin: 0 auto;
+    text-align: center;
+  }
+}

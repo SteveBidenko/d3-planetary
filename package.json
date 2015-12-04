@@ -1,0 +1,31 @@
+{
+  "name": "seven-d3-planetary",
+  "version": "1.0.0",
+  "description": "A page with planetaryjs to reproduce a globe demo with pings",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteveBidenko/d3-planetary.git"
+  },
+  "keywords": [
+    "d3js",
+    "planetaryjs"
+  ],
+  "author": "Steve Bidenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SteveBidenko/d3-planetary/issues"
+  },
+  "homepage": "https://github.com/SteveBidenko/d3-planetary#readme",
+  "devDependencies": {
+    "bower": "^1.6.8",
+    "gulp": "^3.9.0",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-watch": "^4.3.5",
+    "main-bower-files": "^2.9.0"
+  }
+}
