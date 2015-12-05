@@ -1,7 +1,8 @@
 (function() {
-  var globe = planetaryjs.planet();
+  var globe = planetaryjs.planet(),
+    rotatingMode = document.getElementById('rotating');
   // Load our custom `autorotate` plugin; see below.
-  // globe.loadPlugin(autorotate(5));
+  globe.loadPlugin(autorotate(5));
   // The `earth` plugin draws the oceans and the land; it's actually
   // a combination of several separate built-in plugins.
   //
@@ -22,16 +23,26 @@
   // The `zoom` and `drag` plugins enable
   // manipulating the globe with the mouse.
   globe.loadPlugin(planetaryjs.plugins.zoom({
-    scaleExtent: [100, 600]
+    scaleExtent: [100, 1200]
   }));
+  /**
+   * Turn rotating mode on/off on the globe
+   */
+  rotatingMode.onclick = function () {
+    globe.plugins.autorotate[this.checked ? 'resume' : 'pause']();
+  };
   globe.loadPlugin(planetaryjs.plugins.drag({
     // Dragging the globe should pause the
     // automatic rotation until we release the mouse.
     onDragStart: function() {
-      // this.plugins.autorotate.pause();
+      if (rotatingMode.checked) {
+        this.plugins.autorotate.pause();
+      }
     },
     onDragEnd: function() {
-      // this.plugins.autorotate.resume();
+      if (rotatingMode.checked) {
+        this.plugins.autorotate.resume();
+      }
     }
   }));
   // Set up the globe's initial scale, offset, and rotation.
@@ -59,6 +70,11 @@
   }
   // Draw that globe!
   globe.draw(canvas);
+
+  /**
+   * We turn off rotating mode after starting
+   */
+  rotatingMode.checked || globe.plugins.autorotate.pause();
 
   // This plugin will automatically rotate the globe around its vertical
   // axis a configured number of degrees every second.
