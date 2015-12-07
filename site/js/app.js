@@ -59,9 +59,20 @@
   }, 500);
 
   var canvas = document.getElementById('rotatingGlobe');
+  /**
+   * setup the cursor as pointer while mouse pressing
+   */
+  canvas.onmousedown = function () {
+    this.style.cursor = "pointer";
+  }
+  /**
+   * restore the cursor while mouse releasing
+   */
+  canvas.onmouseup = function () {
+    this.style.cursor = "";
+  }
   // Special code to handle high-density displays (e.g. retina, some phones)
   // In the future, Planetary.js will handle this by itself (or via a plugin).
-  // debugger;
   if (window.devicePixelRatio == 2) {
     canvas.width = 1200;
     canvas.height = 1200;

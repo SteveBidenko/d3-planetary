@@ -5,5 +5,9 @@ body {
     max-width: $containerWidth;
     margin: 0 auto;
     text-align: center;
+
+    label {
+      cursor: pointer;
+    }
   }
 }
