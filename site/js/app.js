@@ -1,6 +1,8 @@
 (function() {
   var globe = planetaryjs.planet(),
-    rotatingMode = document.getElementById('rotating');
+      rotatingMode = document.getElementById('rotating'),
+      geoPanel = document.getElementById('geoPanel'),
+      globeRadius = 240;
   // Load our custom `autorotate` plugin; see below.
   globe.loadPlugin(autorotate(5));
   // The `earth` plugin draws the oceans and the land; it's actually
@@ -23,7 +25,7 @@
   // The `zoom` and `drag` plugins enable
   // manipulating the globe with the mouse.
   globe.loadPlugin(planetaryjs.plugins.zoom({
-    scaleExtent: [100, 1200]
+    scaleExtent: [globeRadius, 5 * globeRadius]
   }));
   /**
    * Turn rotating mode on/off on the globe
@@ -46,7 +48,7 @@
     }
   }));
   // Set up the globe's initial scale, offset, and rotation.
-  globe.projection.scale(300).translate([300, 300]).rotate([0, -10, 0]);
+  globe.projection.scale(globeRadius).translate([globeRadius, globeRadius]).rotate([0, -10, 0]);
 
   // Every few hundred milliseconds, we'll draw another random ping.
   var colors = ['red', 'yellow', 'white', 'orange', 'green', 'cyan', 'pink'];
@@ -71,13 +73,30 @@
   canvas.onmouseup = function () {
     this.style.cursor = "";
   }
+  /**
+   * setup the handler for click to show geo coordinates (longitude, altitude)
+   */
+  canvas.addEventListener('click', function(event) {
+    var x = event.x,
+        y = event.y,
+        coordinates;
+    x -= this.offsetLeft;
+    y -= this.offsetTop;
+    coordinates = globe.projection.invert([x, y]);
+    geoPanel.textContent = "[ " + coordinates.join(", ") + " ]";
+    geoPanel.style.display = 'block';
+    // Turn the geo-panel off after 1.68 sec
+    setTimeout(function () {
+      geoPanel.style.display = 'none';
+    }, 1618);
+  }, false);
   // Special code to handle high-density displays (e.g. retina, some phones)
   // In the future, Planetary.js will handle this by itself (or via a plugin).
   if (window.devicePixelRatio == 2) {
-    canvas.width = 1200;
-    canvas.height = 1200;
+    canvas.width = 2 * globeRadius + 160;
+    canvas.height = 2 * globeRadius + 160;
     context = canvas.getContext('2d');
-    context.scale(2, 2);
+    context.scale(1.3, 1.3);
   }
   // Draw that globe!
   globe.draw(canvas);
