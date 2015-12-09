@@ -2,6 +2,7 @@
     var globe = planetaryjs.planet(),
         rotatingMode = document.getElementById('rotating'),
         geoPanel = document.getElementById('geoPanel'),
+        selectedCountry = document.getElementById('selectedCountry'),
         geocoder = new google.maps.Geocoder,
         globeRadius = 240;
     // Load our custom `autorotate` plugin; see below.
@@ -87,11 +88,12 @@
         geoPanel.textContent = "[" + coordinates.join(",") + "]";
 
         geocoder.geocode({'location': { lat: coordinates[1], lng: coordinates[0] }}, function(results, status) {
-            // console.log(results[0]);
             if (status === google.maps.GeocoderStatus.OK && results[0]) {
                 var country = getComponent(results, 'country', 'long_name'),
                     twoLetterCode = getComponent(results, 'country');
                 geoPanel.textContent = country + "(" + twoLetterCode + ")";
+                // Link from the globe to the tag with id selectedCountry
+                selectedCountry.value = twoLetterCode;
             }
         });
         geoPanel.style.display = 'block';
@@ -179,7 +181,7 @@
     /**
      * Looking for a desired type in the results and getting component using typeName
      * @param {Object} results
-     * @param {String} desiredType, for expample 'country'
+     * @param {String} desiredType, for example 'country'
      * @param {?String} typeName, for example 'long_name'. If it doesn't set it is equal to 'short_name'
      * @returns {*}
      */
