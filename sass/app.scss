@@ -8,6 +8,8 @@ body {
 
     h1 {
       -webkit-margin-after: 0;
+      &:hover { cursor: pointer; }
+      &:active { position: relative; top: 1px; }
     }
 
     label {

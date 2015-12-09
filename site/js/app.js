@@ -1,6 +1,7 @@
 (function() {
     var globe = planetaryjs.planet(),
-        rotatingMode = document.getElementById('rotating'),
+        rotating = document.getElementById('rotating'),
+        rotatingMode = false,
         geoPanel = document.getElementById('geoPanel'),
         selectedCountry = document.getElementById('selectedCountry'),
         geocoder = new google.maps.Geocoder,
@@ -32,8 +33,9 @@
     /**
     * Turn rotating mode on/off on the globe
     */
-    rotatingMode.onclick = function () {
-        globe.plugins.autorotate[this.checked ? 'resume' : 'pause']();
+    rotating.onclick = function () {
+        rotatingMode = !rotatingMode;
+        globe.plugins.autorotate[rotatingMode ? 'resume' : 'pause']();
     };
     globe.loadPlugin(planetaryjs.plugins.drag({
         // Dragging the globe should pause the
