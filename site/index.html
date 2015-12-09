@@ -17,15 +17,16 @@
 <body>
     <div class="container">
         <h1>Earth</h1>
-        <canvas id='rotatingGlobe' width='480' height='480'></canvas><br />
         <div class="infoPanels">
-            <div id="geoPanel">0.0, 0.0</div>
+            <div id="geoPanel">Click your country</div>
         </div>
+        <canvas id='rotatingGlobe' width='480' height='480'></canvas><br />
         <label for="rotating">
             <input type="checkbox" name="rotating" value="rotate" id="rotating" />
             Turn rotating mode on/off
         </label>
     </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEIfIKLLRC1Re4cLBaBA7HV6dM5dO-178"></script>
     <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
