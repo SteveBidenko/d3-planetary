@@ -26,7 +26,7 @@
     // The `zoom` and `drag` plugins enable
     // manipulating the globe with the mouse.
     globe.loadPlugin(planetaryjs.plugins.zoom({
-        scaleExtent: [globeRadius, 5 * globeRadius]
+        scaleExtent: [globeRadius, 20 * globeRadius]
     }));
     /**
     * Turn rotating mode on/off on the globe

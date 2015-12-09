@@ -27,5 +27,8 @@
     "gulp-sass": "^2.1.0",
     "gulp-watch": "^4.3.5",
     "main-bower-files": "^2.9.0"
+  },
+  "dependencies": {
+    "csvtojson": "^0.4.6"
   }
 }
