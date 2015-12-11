@@ -1,10 +1,15 @@
 (function() {
     var globe = planetaryjs.planet(),
-        rotatingMode = document.getElementById('rotating'),
+        canvas = document.getElementById('rotatingGlobe'),
+        rotating = document.getElementById('rotating'),
+        rotatingMode = false,
         geoPanel = document.getElementById('geoPanel'),
         selectedCountry = document.getElementById('selectedCountry'),
         geocoder = new google.maps.Geocoder,
         globeRadius = 240;
+
+    document.globe = globe;
+    document.geocoder = geocoder;
     // Load our custom `autorotate` plugin; see below.
     globe.loadPlugin(autorotate(5));
     // The `earth` plugin draws the oceans and the land; it's actually
@@ -22,8 +27,6 @@
     globe.loadPlugin(lakes({
         fill: '#000080'
     }));
-    // The `pings` plugin draws animated pings on the globe.
-    globe.loadPlugin(planetaryjs.plugins.pings());
     // The `zoom` and `drag` plugins enable
     // manipulating the globe with the mouse.
     globe.loadPlugin(planetaryjs.plugins.zoom({
@@ -32,8 +35,9 @@
     /**
     * Turn rotating mode on/off on the globe
     */
-    rotatingMode.onclick = function () {
-        globe.plugins.autorotate[this.checked ? 'resume' : 'pause']();
+    rotating.onclick = function () {
+        rotatingMode = !rotatingMode;
+        globe.plugins.autorotate[rotatingMode ? 'resume' : 'pause']();
     };
     globe.loadPlugin(planetaryjs.plugins.drag({
         // Dragging the globe should pause the
@@ -55,14 +59,17 @@
     // Every few hundred milliseconds, we'll draw another random ping.
     var colors = ['red', 'yellow', 'white', 'orange', 'green', 'cyan', 'pink'];
 
+    // The `pings` plugin draws animated pings on the globe.
+    /*
+    globe.loadPlugin(planetaryjs.plugins.pings());
     setInterval(function() {
         var lat = Math.random() * 170 - 85;
         var lng = Math.random() * 360 - 180;
         var color = colors[Math.floor(Math.random() * colors.length)];
         globe.plugins.pings.add(lng, lat, { color: color, ttl: 2000, angle: Math.random() * 10 });
     }, 500);
+    */
 
-    var canvas = document.getElementById('rotatingGlobe');
     /**
     * setup the cursor as pointer while mouse pressing
     */
@@ -91,9 +98,11 @@
             if (status === google.maps.GeocoderStatus.OK && results[0]) {
                 var country = getComponent(results, 'country', 'long_name'),
                     twoLetterCode = getComponent(results, 'country');
-                geoPanel.textContent = country + "(" + twoLetterCode + ")";
+                geoPanel.textContent = country + " (" + twoLetterCode + ")";
                 // Link from the globe to the tag with id selectedCountry
                 selectedCountry.value = twoLetterCode;
+                // Rotate the globe
+                globe.rotateGlobe(twoLetterCode);
             }
         });
         geoPanel.style.display = 'block';

@@ -8,6 +8,8 @@ body {
 
     h1 {
       -webkit-margin-after: 0;
+      &:hover { cursor: pointer; }
+      &:active { position: relative; top: 1px; }
     }
 
     label {
@@ -24,8 +26,13 @@ body {
     margin-bottom: 10px;
 
     #geoPanel {
-      background-color: #fff;
-      padding: 5px;
+      display: block;
+      position: absolute;
+      width: 480px;
+      background: transparent;
+      color: yellow;
+      top: 240px;
+      font-weight: bold;
       text-align: center;
       font-family: 'Roboto','sans-serif';
       line-height: 25px;
