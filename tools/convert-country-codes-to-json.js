@@ -4,8 +4,8 @@ var Converter = require("csvtojson").Converter,
         delimiter: ';',
         toArrayString: true
     }),
-    readStream = require("fs").createReadStream("country_codes.csv"),
-    writeStream = require("fs").createWriteStream("../site/country_codes.json");
+    readStream = require("fs").createReadStream("tools/country_codes.csv"),
+    writeStream = require("fs").createWriteStream("site/lib/country_codes.json");
 
 // end_parsed will be emitted once parsing finished
 converter.on("end_parsed", function (jsonArray) {

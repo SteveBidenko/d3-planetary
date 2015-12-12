@@ -1,58 +1,19 @@
-$containerWidth: 480px;
-$container2Width: 640px;
-
 body {
+  margin: 0;
+
   div.container {
     margin: 0 auto;
     text-align: center;
-
-    h1 {
-      -webkit-margin-after: 0;
-      &:hover { cursor: pointer; }
-      &:active { position: relative; top: 1px; }
-    }
-
-    label {
-      cursor: pointer;
-    }
-
-    canvas {
-      margin-bottom: 20px;
-    }
-  }
-
-  div.infoPanels {
-    position: relative;
-    margin-bottom: 10px;
-
-    #geoPanel {
-      display: block;
-      position: absolute;
-      width: 480px;
-      background: transparent;
-      color: yellow;
-      top: 240px;
-      font-weight: bold;
-      text-align: center;
-      font-family: 'Roboto','sans-serif';
-      line-height: 25px;
-    }
   }
 }
 
-@media screen and (min-width: 480px) {
-  body {
-    div.container {
-      max-width: $containerWidth;
-    }
-  }
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  /* Retina-specific stuff here */
-  body {
-    div.container {
-      max-width: $container2Width;
-    }
-  }
+#geoPanel {
+  display: inline-block;
+  position: relative;
+  width: 0px;
+  word-wrap: normal;
+  background: transparent;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
 }
