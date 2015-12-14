@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 1px;
 
   div.container {
     margin: 0 auto;
@@ -10,7 +10,7 @@ body {
 #geoPanel {
   display: inline-block;
   position: relative;
-  width: 0px;
+  width: 100%;
   word-wrap: normal;
   background: transparent;
   font-weight: bold;

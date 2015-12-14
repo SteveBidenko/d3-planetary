@@ -3,11 +3,11 @@
         container = document.getElementsByClassName('container'),
         canvas = document.getElementById('rotatingGlobe'),
         landscape = window.innerWidth > window.innerHeight, // true if landscape
-        canvasSize = landscape ? window.innerHeight : window.innerWidth,
+        canvasSize = (landscape ? (window.innerHeight - 48) : window.innerWidth ) - 2,
         geoPanel = document.getElementById('geoPanel'),
         geocoder = new google.maps.Geocoder,
         globeRadius = canvasSize / 2,
-        geopanelColor = 'yellow',
+        geopanelColor = 'black',
         oceanColor = '#2a357d',
         landColor = '#389631',
         xmlhttp = new XMLHttpRequest(),
@@ -18,9 +18,7 @@
      * Init the canvas, geoPanel, container
      */
     canvas.width = canvas.height = canvasSize;
-    geoPanel.style.top = -globeRadius + 'px';
     if (landscape) {
-        geoPanel.style.left = geoPanel.style.top;
         // We need to set the width of the container. Otherwise the geoPanel sets out of the globe
         (window.innerWidth >= canvasSize * 2) && (container[0].style.width = (canvasSize + globeRadius) + 'px');
     } else {
@@ -32,11 +30,14 @@
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             JSON.parse(xmlhttp.responseText).forEach(function(value) {
-                var option = document.createElement("option");
-                option.text = value["Country Name"];
+                var option = document.createElement("option"),
+                    countryName = value["Country Name"];
+
+                countries[value["ISO 3166-1-alpha-2 code"]] = countryName;
+                // cut the countryName to the first comma
+                option.text = countryName.split(',')[0];
                 option.value = value["ISO 3166-1-alpha-2 code"];
                 selectedCountry.add(option);
-                countries[value["ISO 3166-1-alpha-2 code"]] = value["Country Name"];
             });
             /**
              * Rotate the globe when data is arrived
