@@ -4,6 +4,7 @@
         canvas = document.getElementById('rotatingGlobe'),
         landscape = window.innerWidth > window.innerHeight, // true if landscape
         canvasSize = (landscape ? (window.innerHeight - 48) : window.innerWidth ) - 2,
+        isNetscape = navigator.appName === 'Netscape',
         geoPanel = document.getElementById('geoPanel'),
         geocoder = new google.maps.Geocoder,
         globeRadius = canvasSize / 2,
@@ -108,9 +109,10 @@
      * setup the handler for click to show geo coordinates (longitude, altitude)
      */
     canvas.addEventListener('click', function(event) {
-        var x = event.x,
-            y = event.y,
+        var x = event[isNetscape ? 'clientX' : 'x'],
+            y = event[isNetscape ? 'clientY' : 'y'],
             coordinates;
+
         x -= this.offsetLeft;
         y -= this.offsetTop;
         coordinates = globe.projection.invert([x, y]);
